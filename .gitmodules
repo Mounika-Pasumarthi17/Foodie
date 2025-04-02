@@ -1,0 +1,3 @@
+[submodule "app1"]
+	path = app1
+	url = https://github.com/Mounika-Pasumarthi17/MainPro.git
