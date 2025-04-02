@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="{% static 'order.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>🎉 Order Placed Successfully!</h2>
+        <p>Thank you for your order. Your food will be delivered soon. 🚀</p>
+        <a href="{% url 'online_food' %}" class="btn btn-primary">🍽️ Continue Shopping</a>
+    </div>
+</body>
+</html>

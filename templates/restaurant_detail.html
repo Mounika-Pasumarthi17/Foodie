@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foodie Fiesta Hub</title>
+    <link rel="stylesheet" href="{% static 'restaurant.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- Google Maps API -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_kcE1G1ejqIg42BS5b0GcLJmNYVqG3hk&callback=initMap"
+      async
+      defer
+    ></script>
+
+
+    <script>
+      function initMap() {
+        var mapElement = document.getElementById("map");
+        if (!mapElement) {
+          console.error("Map container not found.");
+          return;
+        }
+
+        // Extract latitude and longitude from data attributes
+        var lat = parseFloat(mapElement.getAttribute("data-latitude"));
+        var lng = parseFloat(mapElement.getAttribute("data-longitude"));
+
+        // Default fallback location (Example: New York)
+        if (isNaN(lat) || isNaN(lng) || lat === 0 || lng === 0) {
+          lat = 40.7128;  // Default latitude (New York)
+          lng = -74.0060; // Default longitude (New York)
+          console.warn("Invalid coordinates, using default location.");
+        }
+
+        var restaurantLocation = { lat: lat, lng: lng };
+
+        // Create a map centered at the restaurant's location
+        var map = new google.maps.Map(mapElement, {
+          zoom: 15,
+          center: restaurantLocation,
+        });
+
+        // Add a marker for the restaurant
+        var marker = new google.maps.Marker({
+          position: restaurantLocation,
+          map: map,
+          title: "{{ restaurant.name }}", // Dynamic restaurant name
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="{% url 'home' %}"
+        >
+          <img src="{% static 'logo.png' %}" alt="logo" id="logo" />
+          <span class="ms-2 fw-bold">Foodie Fiesta Hub</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <form
+          class="d-flex ms-1"
+          method="GET"
+          action="{% url 'restaurant_view' %}"
+        >
+          <input
+            class="form-control me-2 search-input"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            name="q"
+          />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link active" href="{% url 'online_food' %}">Food Items</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item  profile-tab">
+              <a class="nav-link active" href="#" >Hello, {{ user.username }}
+                <div class="profile-container">
+                  <div class="text-center">
+                  {% if user.profile_picture and user.profile_picture.url %}
+                  <img
+                    src="{{ user.profile_picture.url }}"
+                    class="rounded-circle mb-3" alt="User Profile Picture"  />
+                    
+                  {% else %}
+                  <img
+                    src="{% static 'default-profile.png' %}"
+                    class="rounded-circle mb-3"
+                    alt="User Profile Picture" 
+                  />
+                  {% endif %}
+                </a>
+                  <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                  <p class="text-muted">{{ user.email }}</p>
+              
+                  <a
+                    href="{% url 'edit_profile_view' %}"
+                    class="btn btn-primary"
+                    >Edit Profile</a
+                  >
+                </div>
+                <hr />
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <strong>Full Name:</strong> {{ user.first_name }} {{user.last_name }}
+                  </li>
+                  <li class="list-group-item">
+                    <strong>Email:</strong> {{ user.email }}
+                  </li>
+                  <li class="list-group-item">
+                    <strong>Phone:</strong> {{ user.phone_number }}
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+           
+            <li class="nav-item">
+              <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="{% url 'register' %}">SignUp</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Restaurant Details -->
+    <div class="container restaurant-detail-container">
+      <img
+        src="{{ restaurant.image.url }}"
+        alt="{{ restaurant.name }}"
+        class="restaurant-image"
+      />
+      <h1>{{ restaurant.name }}</h1>
+      <p>{{ restaurant.description }}</p>
+      <h3>Location: {{ restaurant.location }}</h3>
+      <h3>Contact: {{ restaurant.contact }}</h3>
+      <h3>Opening Hours: {{ restaurant.opening_hours }}</h3>
+      <h3>Closing Hours: {{ restaurant.closing_hours }}</h3>
+
+      <!-- Google Map -->
+      <h3>Find Us Here:</h3>
+      <div id="map" data-latitude="{{ restaurant.latitude }}" data-longitude="{{ restaurant.longitude }}"></div>
+      <a
+        href="{% url 'book_restaurant' restaurant.id %}"
+        class="btn btn-primary"
+        >Book a Table</a
+      >
+      <a href="{% url 'restaurant' %}" class="btn btn-primary"
+        >Back to Restaurants</a
+      >
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful</title>
+    <link rel="stylesheet" href="{% static 'show.css' %}">
+</head>
+<body>
+    <div class="success-container">
+        <h2>🎉 Booking Confirmed! 🎉</h2>
+        <p>Your show has been successfully booked.</p>
+        <a href="{% url 'book_show' %}" class="btn">Book Another Show</a>
+    </div>
+</body>
+</html>

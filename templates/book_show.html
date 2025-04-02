@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Show | BookMyShow</title>
+    <link rel="stylesheet" href="{% static 'show.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>🎟️ Book Your Show 🎟️</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Book Now</button>
+        </form>
+    </div>
+</body>
+</html>

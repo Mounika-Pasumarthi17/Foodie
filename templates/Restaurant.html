@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodie Fiesta Hub</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'script.js' %}" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
+    <style>
+        .search-input{
+          width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> 
+                <img src="{% static 'logo.png' %}" alt="logo" id="logo"> Foodie Fiesta Hub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="d-flex ms-1" method="GET" action="{% url 'restaurant_view' %}">
+                <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown1">
+                <ul class="navbar-nav" id="navbarNav">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'online_food' %}">Food Items</a></li>
+
+                    {% if user.is_authenticated %}
+                  <li class="nav-item profile-tab">
+                    <a class="nav-link active" href="#">Hello, {{ user.username }}</a>
+                    <div class="profile-container">
+                        <div class="text-center">
+                            {% if user.profile_picture and user.profile_picture.url %}
+                                <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3" alt="User Profile Picture">
+                            {% else %}
+                                <img src="{% static 'default-profile.png' %}" class="rounded-circle mb-3" alt="User Profile Picture">
+                            {% endif %}
+                            <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                            <p class="text-muted">{{ user.email }}</p>
+                        </div>
+                        <hr>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+                            <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                            <li class="list-group-item"><strong>Phone:</strong> {{ user.phone_number }}</li>
+                        </ul>
+                    </div>
+    
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+              {% endif %}
+    
+                </ul>
+              </div>
+            </div>
+        </nav>
+
+
+    <h1 id="main_h1">RESTAURANTS</h1>
+
+    <div id="veg">
+        {% for restaurant in restaurants %}
+            <div class="food-itemv">
+                {% if restaurant.id %}
+                    <a href="{% url 'restaurant_detail' restaurant.id %}"><img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}"></a>
+                {% else %}
+                    <p>Restaurant ID</p>
+                {% endif %}
+
+                
+                <h5>{{ restaurant.name }}</h5>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

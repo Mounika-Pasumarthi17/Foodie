@@ -1,0 +1,193 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('../static/b.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    height: 55px;
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.navbar-brand img#logo {
+    width: 30px;
+    height: auto;
+    border-radius: 6px;
+}
+.navbar-nav {
+    align-items: center;
+}
+.navbar-nav .nav-item {
+    margin: 0 5px;
+}
+.navbar-nav .nav-link {
+    font-size: 15px;
+    padding: 8px 12px;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+.navbar-nav .nav-link:hover {
+    color: #ff5722;
+}
+
+/* Profile Dropdown */
+.profile-tab {
+    position: relative;
+}
+.profile-tab .profile-container {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    min-width: 250px;
+}
+.profile-tab:hover .profile-container {
+    display: block;
+}
+.profile-container img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Food Card */
+.food-card {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+.food-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+.food-image {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.food-info {
+    padding: 15px;
+}
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #27ae60;
+}
+.rating {
+    font-size: 18px;
+    color: #f39c12;
+}
+
+/* General Button Styles */
+button, .btn {
+    display: inline-block;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 12px 18px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Specific Button Styles */
+.cart-btn {
+    background-color: #28a745; /* Green */
+}
+
+.order-btn {
+    background-color: #ff9800; /* Orange */
+}
+
+.cart-btn, .order-btn {
+    color: white;
+}
+
+.cart-btn:hover {
+    background-color: #218838;
+}
+
+.order-btn:hover {
+    background-color: #e68900;
+}
+
+/* Remove Outline and Default Styles */
+button:focus, .btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Style the Links Inside Buttons */
+button a, .btn a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+/* Back to Menu Link */
+.back-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #ddd;
+}
+/* Buttons Container */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    button, .btn, .back-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+

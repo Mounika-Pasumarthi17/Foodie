@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">🛒 Your Cart</h2>
+
+        {% if cart_items %}
+            <div class="row">
+                {% for item in cart_items %}
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ item.food_item.image.url }}" class="img-fluid rounded-start" alt="{{ item.food_item.name }}">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.food_item.name }}</h5>
+                                    <p class="card-text"><strong>Price:</strong> ₹{{ item.food_item.price }}</p>
+                                    <p class="card-text"><strong>Quantity:</strong> {{ item.quantity }}</p>
+                                    
+                                    <div class="d-flex">
+                                        <!-- Increase & Decrease Buttons -->
+                                        <a href="{% url 'increase_cart_item' item.id %}" class="btn btn-success btn-sm me-2">➕</a>
+                                        <a href="{% url 'decrease_cart_item' item.id %}" class="btn btn-warning btn-sm me-2">➖</a>
+                                        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm">❌ Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <h3 class="text-center">Total Price: ₹{{ total_price }}</h3>
+            <div class="text-center mt-4">
+                <a href="{% url 'place_order' %}" class="btn btn-success">📦 Place Order</a>
+            </div>
+        {% else %}
+            <h4 class="text-center text-muted">Your cart is empty. 🛒</h4>
+            <div class="text-center mt-4">
+                <a href="{% url 'online_food' %}" class="btn btn-primary">🍽️ Continue Shopping</a>
+            </div>
+        {% endif %}
+    </div>
+    <br>
+    <center><a href="{% url 'online_food' %}" class="back-btn">← Back to Menu</a></center>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

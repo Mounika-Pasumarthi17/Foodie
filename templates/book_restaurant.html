@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table</title>
+    <link rel="stylesheet" href="{% static 'book.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
+</head>
+<body>
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"> <img src="{% static 'logo.png' %}" alt="logo" id="logo">  FOODIGO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav" id="navbarNav">
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
+              <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+              <li class="nav-item"><a class="nav-link active" href="{% url 'online_food' %}">Food Items</a></li>
+              <li class="nav-item">
+                
+              </li>  
+              {% if user.is_authenticated %}
+                    <li class="nav-item profile-tab">
+                        <a class="nav-link active" href="#">Hello, {{ user.username }}</a>
+                        
+                        <div class="profile-container">
+                            <div class="text-center">
+                                {% if user.profile_picture and user.profile_picture.url %}
+                                    <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3" alt="User Profile Picture">
+                                {% else %}
+                                    <img src="{% static 'default-profile.png' %}" class="rounded-circle mb-3" alt="User Profile Picture">
+                                {% endif %}
+                                <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                                <p class="text-muted">{{ user.email }}</p>
+                            </div>
+                            <hr>
+                            <ul class="list-group">
+                                <li class="list-group-item"><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+                                <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                                <li class="list-group-item"><strong>Phone:</strong> {{ user.phone_number }}</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="{% url 'cart_view' %}">
+                          <i class="fas fa-shopping-cart"></i>
+                          <span class="badge bg-danger" id="cartCount">{{ cart_count }}</span>
+                      </a>
+                  </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'register' %}">SignUp</a></li>
+                    {% endif %}
+                    
+                    <li class="nav-item"><a class="nav-link active" href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav> -->
+    <div class="booking-container">
+        <h2>Book a Table at {{ restaurant.name }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Book Now</button>
+        </form>
+        <a href="{% url 'restaurant' %}">Back to Restaurant</a>
+    </div>
+</body>
+</html>

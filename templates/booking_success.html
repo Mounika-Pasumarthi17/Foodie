@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful</title>
+    <link rel="stylesheet" href="{% static 'book.css' %}">
+</head>
+<body>
+    <div class="success-container">
+        <h2>🎉 Booking Successful! 🎉</h2>
+        <p>Your table at <strong>{{ restaurant.name }}</strong> has been booked successfully.</p>
+        <a href="{% url 'restaurant' %}" class="btn">Back to Restaurants</a>
+    </div>
+</body>
+</html>

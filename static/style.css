@@ -1,0 +1,424 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    overflow-x: hidden;
+    width:100%;
+}
+#p1,#p2,#p3{
+    width:100%;
+    height: 400px;
+}
+.profile-tab {
+    position: relative;
+}
+
+.profile-container {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: fit-content;
+    border-radius: 5px;
+}
+
+.profile-tab:hover .profile-container {
+    display: block;
+}
+
+.profile-container input {
+    font-size: 14px;
+    padding: 5px;
+}
+
+.profile-container img {
+width: 60px; /* Adjust width */
+height: 60px; /* Adjust height */
+object-fit: cover; /* Ensure it looks good */
+border-radius: 50%; /* Keep it circular */
+border: 2px solid #ddd; /* Optional: Add a light border */
+}
+
+
+h3{
+    color:blue;
+    padding-bottom: 30px;
+}
+.carousel-caption h1 {
+    font-size: 3rem; /* Increase heading font size */
+}
+.carousel-caption p {
+    font-size: 1.5rem; /* Increase paragraph font size */
+}
+.carousel-caption .btn {
+    font-size: 1.25rem; /* Increase button font size */
+}
+
+#form_container {
+    width:500px;
+    height: fit-content;
+    /* max-width: 400px; */
+    margin: 20px auto;
+    padding: 30px 30px;
+    border: 2px solid black;
+    border: transparent;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px blue;
+    background-color: #fff;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+}
+
+#form_container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-floating {
+    width: 100%;
+}
+
+.form-floating input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#form_container .form-control {
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+#register {
+    background-color: royalblue;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 15px;
+    width: 100%;
+}
+#register:hover {
+    background-color: green;
+}
+#have-acc {
+    margin-left: 15px;
+}
+#have-acc:hover {
+    color: #0056b3;
+}
+nav {
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+.navbar-brand{
+    cursor:default;
+}
+#navbarNav{
+    margin-left: 80px;
+}
+#logo{
+    width:40px;
+    height:50px;
+    margin-left: 10px;
+}
+.container-fluid{
+    background-color:lightgray;
+}
+.dropdown-menu {
+    display: none;
+}
+.nav-item:hover .dropdown-menu {
+    display: block;
+}
+.custom-paragraph {
+    max-width: 800px; /* Adjust the width as needed */
+    margin: auto;
+    text-align: justify; /* Optional: Justifies the text */
+}
+#profile {
+    display: none;
+    position: absolute;
+    top: 60px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    width: 300px; /* Adjust as needed */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 20px;
+}
+.nav-item.profile-tab:hover #profile {
+    display: block;
+}
+
+
+.card {
+    height: 450px; 
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+.card-body .btn {
+    margin-top: auto; 
+}
+/* Ensure the card image and card body have equal width */
+.equal-width {
+    display: flex;
+    flex-direction: column;
+    width: 80%; /* Ensure card takes full width of the container */
+}
+.equal-width .card-img-top,
+.equal-width .card-body {
+    flex: 1 1 auto;
+    width: 100%; /* Ensure both take full width */
+    height: 200px;
+}
+/* Hover effect for card images */
+.card-img-top {
+    transition: transform 0.3s ease-in-out; /* Smooth transition for the effect */
+}
+.card-img-top:hover {
+    transform: scale(1.05); /* Zoom in effect */
+    /* Add any additional effects you want, such as changing brightness or contrast */
+}
+.icon {
+    margin-right: 10px; 
+    font-size: 20px;
+    margin-left: 100px;
+}
+#ci{
+    margin-left: 100px;
+}
+
+#restaurant-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .restaurant-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 300px;
+    overflow: hidden;
+  }
+  
+  .restaurant-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .restaurant-card h3 {
+    margin: 10px;
+    font-size: 1.5em;
+  }
+  
+  .restaurant-card p {
+    margin: 10px;
+    color: #555;
+  }
+
+#navbarNav2{
+    margin-left: 100px;
+}
+
+#food_container {
+    margin-top: 40px;
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Keep images in a single row */
+    padding: 10px;
+    gap: 10px;
+    scroll-behavior: smooth; /* Smooth scrolling effect */
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Hide scrollbar for Webkit-based browsers (Chrome, Safari) */
+#food_container::-webkit-scrollbar {
+    display: none;
+}
+.scroll-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#food_container a h5:hover{
+    text-decoration: none;
+}
+
+.food-item {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+.food-item img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+/* Zoom-out effect on hover */
+.food-item:hover img {
+    transform: scale(1.1); /* Slightly zoom out */
+}
+/* Dish name styling */
+.food-item h5 {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+}
+.food-item:hover h5 {
+    opacity: 1;
+}
+#veg-food-container, #nonveg-food-container,#snack, #drinks {
+    margin-top: 40px;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    gap: 10px;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+/* Hide scrollbar for Chrome, Safari */
+#veg-food-container::-webkit-scrollbar,
+#nonveg-food-container::-webkit-scrollbar {
+    display: none;
+}
+.food-item h5 {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    width: max-content; /* Ensures text width adjusts dynamically */
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.food-item:hover img {
+    transform: scale(0.9); /* Slightly zoom out */
+}
+.scroll-wrapper button {
+    background-color:blue; /* Eye-catching color */
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background 0.3s;
+}
+
+.scroll-wrapper button:hover {
+    background-color:green;
+}
+
+
+#veg img,#non-veg img,#snacks img{
+    width:300px;
+    height: 300px;
+    float: left;
+}
+
+#veg,#non-veg,#snacks  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.food-itemv ,.food-itemn,.food-itemsn{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+    flex-basis: calc(25% - 20px); /* Set each item to take up 25% of the width, minus the gap */
+    box-sizing: border-box;
+}
+.food-itemv:hover,.food-itemn:hover ,.food-itemsn:hover {
+    transform: scale(1.05);
+}
+.food-itemv h5,.food-itemn h5,.food-itemsn h5 {
+    background-color: #333;
+    color: #fff;
+    margin: 0;
+    padding: 10px;
+    font-size: 1.2em;
+}
+#main_h1 {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #262626;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+
+
+
+
+
+
+#food-details {
+    display: none;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+#food-details h2 {
+    margin-top: 0;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

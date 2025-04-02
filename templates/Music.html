@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodie Fiesta Hub</title>
+    <link rel="stylesheet" href="{% static 'm.css' %}">
+    <script src="{% static 'm.js' %}" defer></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="{% static 'style.css' %}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
+    <style>
+        .search-input{
+          width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Location Modal -->
+    <div id="locationModal" class="modal">
+        <!-- ...existing code... -->
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> 
+                <img src="{% static 'logo.png' %}" alt="logo" id="logo"> Foodie Fiesta Hub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="d-flex ms-1" method="GET" action="{% url 'music_search_view' %}">
+                <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown1">
+                <ul class="navbar-nav" id="navbarNav">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'online_food' %}">Food Items</a></li>
+
+                    {% if user.is_authenticated %}
+                  <li class="nav-item profile-tab">
+                    <a class="nav-link active" href="#">Hello, {{ user.username }}</a>
+                    <div class="profile-container">
+                        <div class="text-center">
+                            {% if user.profile_picture and user.profile_picture.url %}
+                                <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3" alt="User Profile Picture">
+                            {% else %}
+                                <img src="{% static 'default-profile.png' %}" class="rounded-circle mb-3" alt="User Profile Picture">
+                            {% endif %}
+                            <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                            <p class="text-muted">{{ user.email }}</p>
+                        </div>
+                        <hr>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+                            <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                            <li class="list-group-item"><strong>Phone:</strong> {{ user.phone_number }}</li>
+                        </ul>
+                    </div>
+    
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+              {% endif %}
+    
+                </ul>
+              </div>
+            </div>
+        </nav>
+
+    
+  
+
+    <main>
+        <section class="events-container">
+            <div class="container">
+                <h1>Music Shows in <span class="current-location">Hyderabad</span></h1>
+                <div class="row mx-5">
+                    {% for event in events %}
+                    <div class="col-md-4 mt-4">
+                        <div class="card mb-4 equal-width">
+                            <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
+                            <div class="card-body">
+                                <h3>{{ event.title }}</h3>
+                                <p class="venue">{{ event.venue }}</p>
+                                <p class="price">₹ {{ event.price }} onwards</p>
+                                <a href="{% url 'book_show' %}" class="btn btn-primary">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Foodie Fiesta Hub</h4>
+                <ul>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                    <li>Current Openings</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>HELP</h4>
+                <ul>
+                    <li>FAQs</li>
+                    <li>Terms & Conditions</li>
+                    <li>Privacy Policy</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright 2024 © Bigtree Entertainment Pvt. Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

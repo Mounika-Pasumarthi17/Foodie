@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodie Fiesta Hub</title>
+    <link rel="stylesheet" href="{% static 'one.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="{% static 'script.js' %}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+</head>
+<body>
+
+
+     <!-- Navbar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <img src="{% static 'logo.png' %}" alt="logo" id="logo"> 
+                <span class="ms-2 fw-bold">Foodie Fiesta Hub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="d-flex ms-1" method="GET" action="{% url 'food_search_view' %}">
+                <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="foodDropdown" role="button" data-bs-toggle="dropdown">Food Items</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'veg' %}">Veg</a></li>
+                            <li><a class="dropdown-item" href="{% url 'non_veg' %}">Non-Veg</a></li>
+                            <li><a class="dropdown-item" href="{% url 'snacks' %}">Snacks & Drinks</a></li>
+                        </ul>
+                    </li>
+                   
+                    
+                    {% if user.is_authenticated %}
+                    <li class="nav-item profile-tab">
+                        <a class="nav-link active" href="#">Hello, {{ user.username }}</a>
+                        <div class="profile-container">
+                            <div class="text-center">
+                              {% if user.profile_picture and user.profile_picture.url %}
+                                <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3" alt="User Profile Picture">
+                              {% else %}
+                                <img src="{% static 'default-profile.png' %}" class="rounded-circle mb-3" alt="User Profile Picture">
+                              {% endif %}
+                                <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                                <p class="text-muted">{{ user.email }}</p>
+                                <a href="{% url 'edit_profile_view' %}" class="btn btn-primary">Edit Profile</a>
+                            </div>
+                            <hr>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+                            <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                            <li class="list-group-item"><strong>Phone:</strong> {{ user.phone_number }}</li>
+                        </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'register' %}">SignUp</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="card food-card mx-auto">
+            <h2 class="food-title">{{ food_item.name }} - Details</h2> 
+            <img src="{{ food_item.image.url }}" alt="{{ food_item.name }}" class="food-image">
+            <div class="food-info">
+                <!-- <h2>{{ food_item.name }}</h2> -->
+                <p class="category">{{ food_item.category|title }}</p>
+                <p class="description">{{ food_item.description }}</p>
+                <p class="price">Price: ₹{{ food_item.price }}</p>
+                <p class="rating">Rating: ⭐ {{ food_item.rating }}/5.0</p>
+
+                <div class="buttons">
+                    {% if in_cart %}
+                        <a href="{% url 'cart_view' %}" class="btn btn-primary">View Cart</a>
+                    {% else %}
+                        <button class="cart-btn">
+                            <a href="{% url 'add_to_cart' food_item.id %}">🛒 Add to Cart</a>
+                        </button>
+                    {% endif %}
+                    <button class="order-btn">
+                        <a href="{% url 'place_order' %}">📦 Place Order</a>
+                    </button>
+                </div>
+
+                <a href="{% url 'online_food' %}" class="back-btn">← Back to Menu</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

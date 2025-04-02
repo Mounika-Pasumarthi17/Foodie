@@ -1,0 +1,124 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  height: 55px;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.navbar-brand img#logo {
+  width: 30px;
+  height: auto;
+  border-radius: 6px;
+}
+.navbar-nav {
+  align-items: center;
+}
+.navbar-nav .nav-item {
+  margin: 0 5px;
+}
+.navbar-nav .nav-link {
+  font-size: 15px;
+  padding: 8px 12px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ff5722;
+}
+
+/* Profile Dropdown */
+.profile-tab {
+  position: relative;
+}
+.profile-tab .profile-container {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 250px;
+}
+.profile-tab:hover .profile-container {
+  display: block;
+}
+.profile-container img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+/* Restaurant Details */
+.restaurant-detail-container {
+  background-color: white;
+  padding: 30px;
+  margin: 30px auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  text-align: center;
+}
+
+.restaurant-detail-container h3{
+  font-size: 18px;
+  margin-bottom: 10px;
+
+}
+.restaurant-image {
+  width: 50%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+#map {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  margin-top: 20px;
+
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+  margin-top: 15px;
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .restaurant-detail-container {
+      padding: 20px;
+      margin: 20px;
+  }
+
+  .restaurant-image {
+      max-height: 250px;
+  }
+
+  .btn-primary, .btn-secondary {
+      width: 100%;
+  }
+}
